@@ -2,7 +2,7 @@
 // @name         CWAL+
 // @namespace    http://tampermonkey.net/
 // @version      2024-06-13
-// @description  try to take over the world!
+// @description  A UserScript that adds functionality to CWAL (https://cwal.gg).
 // @author       You
 // @match        https://cwal.gg/players/
 // @icon         https://cwal.gg/favicon.png
