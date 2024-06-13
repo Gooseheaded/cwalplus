@@ -4,7 +4,7 @@
 // @version      2024-06-13
 // @description  A UserScript that adds functionality to CWAL (https://cwal.gg).
 // @author       You
-// @match        https://cwal.gg/players/
+// @match        https://cwal.gg/players/*
 // @icon         https://cwal.gg/favicon.png
 // @grant        none
 // ==/UserScript==
