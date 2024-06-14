@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         CWAL+
 // @namespace    http://tampermonkey.net/
-// @version      2024-06-13
+// @version      2024-06-14
 // @description  A UserScript that adds functionality to CWAL (https://cwal.gg).
 // @author       You
-// @match        https://cwal.gg/players/*
+// @match        https://cwal.gg/players/
 // @icon         https://cwal.gg/favicon.png
 // @grant        none
 // ==/UserScript==
@@ -40,7 +40,7 @@
   for (const opponentBadge of opponentBadgeList) {
     // A match means this match shold be shown.
     if (opponentBadge.innerText === userChoice) {
-      getContainerElement(allBadges).style.display = "";
+      getContainerElement(opponentBadge).style.display = "";
     }
     // A mismatch means this match shold be hidden.
     else {
