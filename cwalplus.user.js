@@ -12,15 +12,31 @@
 (function () {
   'use strict';
 
-
   // Shitty way to ask users for a race to filter with.
   // This should probably be like, a dropdown, or a checkbox, or something.
   // TODO(WorsT): Insert a button/dropdown/whatever into the page.
-  let userChoice = "";
-  const validChoices = ["T", "P", "Z"];
-  while (!validChoices.includes(userChoice)) {
-    userChoice = prompt("Choose either 'T', 'P', or 'Z'.");
+  let userChoice = "All";
+  
+  function insertFilterDropDown() {
+    const filterDropDown = document.createElement("div");
+    filterDropDown.innerHTML = `
+    <select class="select select-sm w-full gap-2 max-w-xs">
+      <option disabled selected>Filter by matchup</option>
+      <option>T</option>
+      <option>P</option>
+      <option>Z</option>
+      <option>All</option>
+    </select>
+    `;
+    filterDropDown.addEventListener("change", (event) => {
+      userChoice = event.target.value;
+      filterMatches();
+    });
+    const dropDownContainer = document.querySelector("div.flex.flex-row.justify-end.form-control.w-full")
+    dropDownContainer.prepend(filterDropDown);
+    dropDownContainer.closest("div.flex.flex-row.justify-end.form-control.w-full").classList.add("gap-2");
   }
+  insertFilterDropDown();
 
   function filterMatches() {
     // Disgusting CSS selector that finds all "badges", containing the race
@@ -34,18 +50,19 @@
     return badgeElement.closest("div.w-full.flex.flex-row.gap-5.py-2")
     }
     let exampleBadge = badgeList[0];
-    console.log(exampleBadge)
 
     // Show badges that match the user's choice.
     // Hides badges that don't.
     for (const opponentBadge of badgeList) {
-      console.log(opponentBadge)
 
-      // A match means this match shold be shown.
-      if (opponentBadge.innerText[0] === userChoice) {
+      // The first character of the badge's text is the Race.
+      const opponentRace = opponentBadge.innerText[0];
+
+      // A match means this match should be shown.
+      if (opponentRace === userChoice || userChoice === "All") {
         getContainerElement(opponentBadge).style.display = "";
       }
-      // A mismatch means this match shold be hidden.
+      // A mismatch means this match should be hidden.
       else {
         getContainerElement(opponentBadge).style.display = "none";
       }
